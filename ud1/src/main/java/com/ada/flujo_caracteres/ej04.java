@@ -7,5 +7,8 @@ public class ej04 {
         FileReader fr = new FileReader(d);
         BufferedReader br = new BufferedReader(fr);
         System.out.println(br.readLine());
+        //PRIMERO HACEMOS LO MISMO QUE EN EL EJERCICIO 3 PERO ESTA VEZ EN HER DE USAR EL FR
+        //USAMOS EL BR QUE LEE VARIAS LINEAS. PARA FINALIZAR YSAMOS EL SYSO PARA MOSTRAR POR PANTALLA
+        //CON EL READLINE.
     }
 }
