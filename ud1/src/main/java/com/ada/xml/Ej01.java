@@ -17,25 +17,26 @@ import org.w3c.dom.NodeList;
 
 public class Ej01 {
     public static void main(String[] args) throws Exception {
-        DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();//ESTO ES LO 1º QUE SE PONE PARA CREAR UN DOCUMENTO
-        DocumentBuilder db = dbf.newDocumentBuilder();//ESTO ES LO 2º
-        Document doc = db.newDocument();//SI EL DOCUMENTO ESTA EN BLANDO PONEMOS NEW DOCUMENT, SI QUEREMOS AÑADIR UN XML YA CREADO HACEMOS PARSE(NEW FILE("RUTA DEL XML"))
+        DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();// ESTO ES LO 1º QUE SE PONE PARA CREAR UN
+                                                                          // DOCUMENTO
+        DocumentBuilder db = dbf.newDocumentBuilder();// ESTO ES LO 2º
+        Document doc = db.newDocument();// SI EL DOCUMENTO ESTA EN BLANDO PONEMOS NEW DOCUMENT, SI QUEREMOS AÑADIR UN XML YA CREADO HACEMOS PARSE(NEW FILE("RUTA DEL XML"))
 
-        //AHORA PASAMOS A CREAR EL DOCUMENTO XML
-        //HACEMOS PRIMERO LA RAIZ QUE SERA LIBRERIA
-        Element libreria = doc.createElement("libreria");//ES LA ETIQUETA PRINCIPAL Y DENTRO HAY HIJITOS
-        doc.appendChild(libreria); //LA UNIMOS AL DOCUMENTO
+        // AHORA PASAMOS A CREAR EL DOCUMENTO XML
+        // HACEMOS PRIMERO LA RAIZ QUE SERA LIBRERIA
+        Element libreria = doc.createElement("libreria");// ES LA ETIQUETA PRINCIPAL Y DENTRO HAY HIJITOS
+        doc.appendChild(libreria); // LA UNIMOS AL DOCUMENTO
 
         Element nombre = doc.createElement("nombre");
-        nombre.setTextContent("Libreria Pepe");//ESTAMOS CREANDO UNA ETIQUETA SENCILLA SOLO CON EL NOMBRE DE LA LIBRERIA
-        libreria.appendChild(nombre);//LA UNIMOS AL PADRE
+        nombre.setTextContent("Libreria Pepe");// ESTAMOS CREANDO UNA ETIQUETA SENCILLA SOLO CON EL NOMBRE DE LA LIBRERIA
+        libreria.appendChild(nombre);// LA UNIMOS AL PADRE
 
-        Element libros = doc.createElement("libros");//CREAMOS LA ETIQUETA LIBROS, SERIA COMO LA CAJA QUE GUARDA LOS DOS LIBROS
-        libreria.appendChild(libros);//LA UNIMOS AL PADRE
+        Element libros = doc.createElement("libros");// CREAMOS LA ETIQUETA LIBROS, SERIA COMO LA CAJA QUE GUARDA LOS DOS LIBROS
+        libreria.appendChild(libros);// LA UNIMOS AL PADRE
 
-        Element libro1 = doc.createElement("libro");//CREAMOS LA NIETA DE LIBRERIA
-        libro1.setAttribute("isbn", "1234567890");//LE AÑADIMOS LOS ATRIBUTOS
-        libros.appendChild(libro1);//UNIMOS A LIBROS
+        Element libro1 = doc.createElement("libro");// CREAMOS LA NIETA DE LIBRERIA
+        libro1.setAttribute("isbn", "1234567890");// LE AÑADIMOS LOS ATRIBUTOS
+        libros.appendChild(libro1);// UNIMOS A LIBROS
 
         Element titulo1 = doc.createElement("titulo");
         titulo1.setTextContent("Don Quijote de la Mancha");
@@ -69,83 +70,87 @@ public class Ej01 {
         autor3.setTextContent("Pedor Calderón de la Barca");
         libro3.appendChild(autor3);
 
-
-
-
         /**
          * <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-            <libreria>
-                <nombre>Librería Pepe</nombre>
-                <libros>
-                    <libro isbn="1234567890">
-                        <titulo>Don Quijote de la Mancha</titulo>
-                        <autor>Miguel de Cervantes</autor>
-                    </libro>
-                    <libro isbn="2345678901">
-                        <titulo>Lazarillo de Tormes</titulo>
-                        <autor>Anónimo</autor>
-                    </libro>
-                    <libro isbn="45678910123">
-                        <titulo>La vida es sueño</titulo>
-                        <autor>Pedro Calderón de la Barca</autor>
-                    </libro>
-                </libros>
-            </libreria>
+         * <libreria>
+         * <nombre>Librería Pepe</nombre>
+         * <libros>
+         * <libro isbn="1234567890">
+         * <titulo>Don Quijote de la Mancha</titulo>
+         * <autor>Miguel de Cervantes</autor>
+         * </libro>
+         * <libro isbn="2345678901">
+         * <titulo>Lazarillo de Tormes</titulo>
+         * <autor>Anónimo</autor>
+         * </libro>
+         * <libro isbn="45678910123">
+         * <titulo>La vida es sueño</titulo>
+         * <autor>Pedro Calderón de la Barca</autor>
+         * </libro>
+         * </libros>
+         * </libreria>
          */
 
-        Transformer t = TransformerFactory.newInstance().newTransformer();//ESTO ES PARA QUE JAVA RECORRA EL DOCUMENTO Y SE LEA POR PANTALLA
-        t.setOutputProperty(OutputKeys.INDENT,"yes");
+        Transformer t = TransformerFactory.newInstance().newTransformer();// ESTO ES PARA QUE JAVA RECORRA EL DOCUMENTO Y SE LEA POR PANTALLA
+        t.setOutputProperty(OutputKeys.INDENT, "yes");
         t.transform(new DOMSource(doc), new StreamResult(System.out));
 
-        //EJERCICIO 2 //RECORRER LOS ELEMENTOS DE LA LISTA
-        System.out.println("Libreria" +nombre.getTextContent());
+        // EJERCICIO 2 //RECORRER LOS ELEMENTOS DE LA LISTA
+        System.out.println("Libreria" + nombre.getTextContent());
 
-        //NODE ES EL NOMBRE PARA CUALQUIER TROZO DEL ARBOL XML
-        //SIRVE PARA GUAERDAR DISTINTAS COSAS JUNTAS
+        // NODE ES EL NOMBRE PARA CUALQUIER TROZO DEL ARBOL XML  SIRVE PARA GUAERDAR DISTINTAS COSAS JUNTAS
 
-        NodeList lista = doc.getElementsByTagName("libro");//SIRVE PARA GUARDAR TODO LO QUE SE ENCUENTRE EN LA ETIQUETA LIBRO
+        NodeList lista = doc.getElementsByTagName("libro");// SIRVE PARA GUARDAR TODO LO QUE SE ENCUENTRE EN LA ETIQUETA LIBRO
 
-        for ( int i=0; i<lista.getLength(); i++){//RECORRE LA LISTA DE ETIQUETAS DE LIBROS
-            Element libro =(Element)lista.item(i);//LISTA.ITEM ES PARA COGER UN LIBRO DE LA LISTA, HACE UN CAST PORQUE EN EL NODE LO QUE ESTAMOS COGIENDO SON ELEMENTS (ETIQUETAS)
+        for (int i = 0; i < lista.getLength(); i++) {// RECORRE LA LISTA DE ETIQUETAS DE LIBROS
+            Element libro = (Element) lista.item(i);// LISTA.ITEM ES PARA COGER UN LIBRO DE LA LISTA, HACE UN CAST PORQUE EN EL NODE LO QUE ESTAMOS COGIENDO SON ELEMENTS (ETIQUETAS)
 
-            String isbn = libro.getAttribute("isbn"); //CREAMOS LA VARIABLE ISBN Y LA ASOCIAMOS AL ISBN DE LA ETQIETA LIBRO
-            String titulo = libro.getElementsByTagName("titulo").item(0).getTextContent();//PONEMMOS ITEM 0 PARA QUE NOS SALGA DESDE EL LIBRO 1
+            String isbn = libro.getAttribute("isbn"); // CREAMOS LA VARIABLE ISBN Y LA ASOCIAMOS AL ISBN DE LA ETQIETA LIBRO
+            String titulo = libro.getElementsByTagName("titulo").item(0).getTextContent();// PONEMMOS ITEM 0 PARA QUE NOS SALGA DESDE EL LIBRO 1
             String autor = libro.getElementsByTagName("autor").item(0).getTextContent();
 
-            System.out.println("LIBRO: " +(i+1));
-            System.out.println("TITULO: " +titulo);
-            System.out.println("ISBN: " +isbn);
-            System.out.println("AUTOR: " +autor);
-
-            //EJ3 CREAR EL XML A PARTIR DE DOOM
-            //ESTE EJERCICIO LO TENEMOS EN MEMORIA PERO NO TENEMOS UN ARCHIVO XML GUARDADO, VAMOS A CREARLO
-
-            File archivo = new File ("libreria.xml");//CREA EL ARCHIVO XML
-            Transformer transformer = TransformerFactory.newDefaultInstance().newTransformer();
-            /**
-             * TRANSFORMER ES EL TRANSFOPRMADOR QUE CONVIERTE EL ARBOL EN XML
-             * TransformerFactory	FABRICA DE TRANSFORMADORES
-                .newInstance()	CREA UNA FABRICA NUEVA
-                .newTransformer()	HAZME UN TRASNFORMADOR
-            */
-            transformer.setOutputProperty(OutputKeys.INDENT, "yes"); //EL INDENT ES UNA SANGRIA, EL XML SALE ORDENADO
-            transformer.setOutputProperty(OutputKeys.ENCODING, "UTF-8");//EL UTF 8 ES PARA QUE SE VEAN LAS TILDES Y LAS Ñ Y DEMAS
-
-            DOMSource origen = new DOMSource(doc);//EL ORIGEN ES EL ARBOL DOOM doc
-            StreamResult destino = new StreamResult(archivo);//EL DESTINO ES archivo QUE ES DONDE HEMOS GUARDADO LA RUTA PARA CREAR EL ARCHIVO libreri.xml
-
-            transformer.transform(origen, destino);//COGE EL ARBOL Y ESCRIBELO EN EL DESTINO
-
-            System.out.println("ARCHIVO CREADO EN: " +archivo.getAbsolutePath());//TE MUESTRA LA RUTA
-
-            
-
-
+            System.out.println("LIBRO: " + (i + 1));
+            System.out.println("TITULO: " + titulo);
+            System.out.println("ISBN: " + isbn);
+            System.out.println("AUTOR: " + autor);
         }
-        
 
+        // EJ3 CREAR EL XML A PARTIR DE DOOM ESTE EJERCICIO LO TENEMOS EN MEMORIA PERO NO TENEMOS UN ARCHIVO XML GUARDADO, VAMOS A CREARLO
+
+        File archivo = new File("libreria.xml");// CREA EL ARCHIVO XML
+        Transformer transformer = TransformerFactory.newDefaultInstance().newTransformer();
+        /**
+         * TRANSFORMER ES EL TRANSFOPRMADOR QUE CONVIERTE EL ARBOL EN XML
+         * TransformerFactory FABRICA DE TRANSFORMADORES
+         * .newInstance() CREA UNA FABRICA NUEVA
+         * .newTransformer() HAZME UN TRASNFORMADOR
+         */
+        transformer.setOutputProperty(OutputKeys.INDENT, "yes"); // EL INDENT ES UNA SANGRIA, EL XML SALE ORDENADO
+        transformer.setOutputProperty(OutputKeys.ENCODING, "UTF-8");// EL UTF 8 ES PARA QUE SE VEAN LAS TILDES Y LAS Ñ YDEMAS
+
+        DOMSource origen = new DOMSource(doc);// EL ORIGEN ES EL ARBOL DOOM doc
+        StreamResult destino = new StreamResult(archivo);// EL DESTINO ES archivo QUE ES DONDE HEMOS GUARDADO LA RUTA PARA CREAR EL ARCHIVO libreri.xml
+
+        transformer.transform(origen, destino);// COGE EL ARBOL Y ESCRIBELO EN EL DESTINO
+
+        System.out.println("ARCHIVO CREADO EN: " + archivo.getAbsolutePath());// TE MUESTRA LA RUTA
+
+        // EJERCICIO 4, AÑADIR UN LIBRO YA TENEMOS LO MAS COMPLICADO QUE ES CREAR EL ARBOLD OOM, CON LAS ETIQUETAS Y GUARDARLO EN UN ARCHIVO XML
+
+        Element libro4 = doc.createElement("libro");
+        libro4.setAttribute("isbn", "8901234567");
+        libros.appendChild(libro4);
+
+        Element titulo4 = doc.createElement("titulo");
+        titulo4.setTextContent("100 años de soledad");
+        libro4.appendChild(titulo4);
+
+        Element autor4 = doc.createElement("autor");
+        autor4.setTextContent("Gabriel Garcia Marquez");
+        libro4.appendChild(autor4);
+
+        t.transform(new DOMSource(doc), new StreamResult(System.out));// PARA MOSTRA EL XML DESDE EL ORIGEN, EL DOC DE DOOM A DESTINO EL SYSO
 
     }
 
-    
 }
