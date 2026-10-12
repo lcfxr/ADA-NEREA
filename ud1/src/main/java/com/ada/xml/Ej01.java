@@ -172,6 +172,16 @@ public class Ej01 {
         t.transform(new DOMSource(doc), new StreamResult(System.out));// PARA MOSTRA EL XML DESDE EL ORIGEN, EL DOC DE DOOM A DESTINO EL SYSO
 
 
+        //EJERCICIO 8. AÑADE EL ATRIBUTO ESTADO A LOS LIBROS E INDICA SU VALOR
+
+        listaLibros=doc.getElementsByTagName("libro");
+
+        for (int i=0; i<listaLibros.getLength(); i++){
+            Element libro = (Element)listaLibros.item(i);
+            libro.setAttribute("estado", "Disponible");
+        }
+        t.transform(new DOMSource(doc), new StreamResult(System.out));// PARA MOSTRA EL XML DESDE EL ORIGEN, EL DOC DE DOOM A DESTINO EL SYSO
+
     }
 
 }
