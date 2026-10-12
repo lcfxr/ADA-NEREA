@@ -16,7 +16,7 @@ public class Ej10 {
          * CADA AVISO SE LLAMA EVENTO. SAX NO PUEDE MODIFICAR COMO CON DOOM
          */
     public static void main(String[] args) throws Exception {
-        SAXParserFactory factory = SAXParserFactory.newInstance();
+        SAXParserFactory factory = SAXParserFactory.newInstance();//CREADOR DE SAX, LEE EL XML
         SAXParser parser = factory.newSAXParser();
         parser.parse(new File("libreria.xml"), new ManejadorLibreria());
         
@@ -24,30 +24,30 @@ public class Ej10 {
 }
 
     class ManejadorLibreria extends DefaultHandler{
-        @Override 
-        public void startDocument()throws SAXException{
+        @Override //REESCRIBIR
+        public void startDocument()throws SAXException{//PARA ABRIR ARCHIVO
             System.out.println("EMPIEZA EL DOCUEMNTO");
         }
         @Override 
-        public void startElement(String url, String localName, String qName, Attributes atts) throws SAXException{
+        public void startElement(String url, String localName, String qName, Attributes atts) throws SAXException{//PARA ABRIR ETIQUETA, AÑADIMOS NOMBRE DE ETIQUETAS, ATRIBUTOR Y DEMAS
             System.out.println("Abre: " +qName);
             for (int i=0; i<atts.getLength(); i++){
                 System.out.println("Atributo: " +atts.getQName(i) +" = " +atts.getValue(i));
             }
         }
         @Override 
-        public void characters(char[]ch, int start, int length) throws SAXException{
-            String texto = new String(ch, start, length).trim();
+        public void characters(char[]ch, int start, int length) throws SAXException{//PARA EL TEXTO
+            String texto = new String(ch, start, length).trim();//TRIM QUITA ESPACIOS Y SALTOS DE LINEA
             if(!texto.isEmpty()){
                 System.out.println("Texto: " +texto);
             }
         }
         @Override 
-        public void endElement(String url, String localName, String qName) throws SAXException{
+        public void endElement(String url, String localName, String qName) throws SAXException{//CERRAR ETIQUETA
             System.out.println("Cierra: " +qName);
         }
         @Override 
-        public void endDocument() throws SAXException{
+        public void endDocument() throws SAXException{//CERRAR LIBRO
             System.out.println("TERMINA EL DOCUMENTO");
         }
 }
