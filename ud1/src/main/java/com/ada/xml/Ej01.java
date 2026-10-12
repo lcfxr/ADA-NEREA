@@ -190,6 +190,7 @@ public class Ej01 {
         segundol.removeAttribute("estado");
         t.transform(new DOMSource(doc), new StreamResult(System.out));// PARA MOSTRA EL XML DESDE EL ORIGEN, EL DOC DE DOOM A DESTINO EL SYSO
 
+        
     }
 
 }
