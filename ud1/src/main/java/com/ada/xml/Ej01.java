@@ -182,6 +182,14 @@ public class Ej01 {
         }
         t.transform(new DOMSource(doc), new StreamResult(System.out));// PARA MOSTRA EL XML DESDE EL ORIGEN, EL DOC DE DOOM A DESTINO EL SYSO
 
+        //EJERCICIO 9 ELIMINAR ESTADO DE 1º Y 3º LIBRO
+        Element primero = (Element)listaLibros.item(0);
+        Element segundol = (Element)listaLibros.item(2);
+
+        primero.removeAttribute("estado");
+        segundol.removeAttribute("estado");
+        t.transform(new DOMSource(doc), new StreamResult(System.out));// PARA MOSTRA EL XML DESDE EL ORIGEN, EL DOC DE DOOM A DESTINO EL SYSO
+
     }
 
 }
