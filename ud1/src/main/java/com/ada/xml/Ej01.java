@@ -1,5 +1,7 @@
 package com.ada.xml;
 
+import java.io.File;
+
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
@@ -114,6 +116,29 @@ public class Ej01 {
             System.out.println("TITULO: " +titulo);
             System.out.println("ISBN: " +isbn);
             System.out.println("AUTOR: " +autor);
+
+            //EJ3 CREAR EL XML A PARTIR DE DOOM
+            //ESTE EJERCICIO LO TENEMOS EN MEMORIA PERO NO TENEMOS UN ARCHIVO XML GUARDADO, VAMOS A CREARLO
+
+            File archivo = new File ("libreria.xml");//CREA EL ARCHIVO XML
+            Transformer transformer = TransformerFactory.newDefaultInstance().newTransformer();
+            /**
+             * TRANSFORMER ES EL TRANSFOPRMADOR QUE CONVIERTE EL ARBOL EN XML
+             * TransformerFactory	FABRICA DE TRANSFORMADORES
+                .newInstance()	CREA UNA FABRICA NUEVA
+                .newTransformer()	HAZME UN TRASNFORMADOR
+            */
+            transformer.setOutputProperty(OutputKeys.INDENT, "yes"); //EL INDENT ES UNA SANGRIA, EL XML SALE ORDENADO
+            transformer.setOutputProperty(OutputKeys.ENCODING, "UTF-8");//EL UTF 8 ES PARA QUE SE VEAN LAS TILDES Y LAS Ñ Y DEMAS
+
+            DOMSource origen = new DOMSource(doc);//EL ORIGEN ES EL ARBOL DOOM doc
+            StreamResult destino = new StreamResult(archivo);//EL DESTINO ES archivo QUE ES DONDE HEMOS GUARDADO LA RUTA PARA CREAR EL ARCHIVO libreri.xml
+
+            transformer.transform(origen, destino);//COGE EL ARBOL Y ESCRIBELO EN EL DESTINO
+
+            System.out.println("ARCHIVO CREADO EN: " +archivo.getAbsolutePath());//TE MUESTRA LA RUTA
+
+            
 
 
         }
