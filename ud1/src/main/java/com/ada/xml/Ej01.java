@@ -151,6 +151,27 @@ public class Ej01 {
 
         t.transform(new DOMSource(doc), new StreamResult(System.out));// PARA MOSTRA EL XML DESDE EL ORIGEN, EL DOC DE DOOM A DESTINO EL SYSO
 
+        //EJERCICIO 5 INTRODUCR ERTIQUETA DIRECCION
+        Element direccion = doc.createElement("dirección");
+        direccion.setTextContent("C/ Amiel 26");
+        libreria.appendChild(direccion);
+        libreria.insertBefore(direccion, libros); //ASI CUANDO SALGA SALDRA EN ORDEN
+
+        t.transform(new DOMSource(doc), new StreamResult(System.out));// PARA MOSTRA EL XML DESDE EL ORIGEN, EL DOC DE DOOM A DESTINO EL SYSO
+
+        //EJERCICIO 6 ELIMINAR EL SEGUNDO LIBRO
+
+        NodeList listaLibros = doc.getElementsByTagName("libro");//BUSCAMOS TODOS LOS LIBROS
+        Element segundo = (Element)listaLibros.item(1);//EL ITEM 1 ES EL SEGUNDO LIBRO
+        libros.removeChild(segundo);//BORRAMOS
+
+        t.transform(new DOMSource(doc), new StreamResult(System.out));// PARA MOSTRA EL XML DESDE EL ORIGEN, EL DOC DE DOOM A DESTINO EL SYSO
+
+        //EJERCICIO 7 CAMBIAR LA DIRECCION
+        direccion.setTextContent("C/ Amiel 26");
+        t.transform(new DOMSource(doc), new StreamResult(System.out));// PARA MOSTRA EL XML DESDE EL ORIGEN, EL DOC DE DOOM A DESTINO EL SYSO
+
+
     }
 
 }
