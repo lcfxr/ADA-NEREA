@@ -5,7 +5,7 @@ import java.io.File;
 public class ej02 {
     public static void main(String[] args) {
         
-        File d = new File("d");; //Apuntamos al directorio del ej1
+        File d = new File("d"); //Apuntamos al directorio del ej1
 
         //LISTAMOS
         String[]contenido_d=d.list();
@@ -14,7 +14,6 @@ public class ej02 {
         for(int i=0; i<contenido_d.length; i++){
             System.out.println(contenido_d[i]);
 
-        //La cosa es que no entiendo porque solo se ve solo las primeras subcarpetas y no todo
         }
     }
 }
